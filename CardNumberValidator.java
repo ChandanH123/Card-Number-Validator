@@ -1,5 +1,6 @@
-# Card-Number-Validator
+// Card-Number-Validator
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 public class CardNumberValidator {
@@ -17,16 +18,13 @@ public class CardNumberValidator {
 			if (i%2 == 0 || i == 0)
 			{
 				int n = Integer.parseInt(stringArray[i])*2;
+				
 				if(n>9)
 				{
 					String[] doubleArray = Integer.toString(n).split("");
-					List<Integer> l2 = new ArrayList<Integer>();
-					for(String s:doubleArray)
-					{
-						l2.add(Integer.parseInt(s));
-					}
-					int sum = l2.stream().mapToInt(Integer::intValue).sum();
-					//System.out.println(l2 + "l2");
+					
+					int sum = Arrays.stream(doubleArray).mapToInt(num -> Integer.parseInt(num)).sum();
+					
 					l1.add(sum);
 				}
 				else
@@ -39,12 +37,18 @@ public class CardNumberValidator {
 				l1.add(Integer.parseInt(stringArray[i]));
 			}
 		}
-		int total = l1.stream().mapToInt(Integer::intValue).sum();
+		int total = l1.stream().mapToInt(num -> (num)).sum();
+		
 		System.out.println(total);
+		
 		return total%10 == 0? "Card is valid.":"Card is not valid!";
 			
 	}
 
+	
+	
+	
+	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		
